@@ -1,0 +1,110 @@
+{
+ "buckets": {},
+ "services": {
+  "b9c9555e-6aa5-4edd-9320-a5d5c8ab1803": {
+   "icon": "https://raw.githubusercontent.com/two-workspaces/umami/main/icon.svg",
+   "name": "Umami",
+   "build": {
+    "dockerfilePath": "Dockerfile"
+   },
+   "deploy": {
+    "startCommand": null,
+    "healthcheckPath": "/api/heartbeat",
+    "healthcheckTimeout": 600,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+   },
+   "source": {
+    "repo": "https://github.com/two-workspaces/umami",
+    "rootDirectory": null
+   },
+   "networking": {
+    "serviceDomains": {
+     "<hasDomain>": {}
+    }
+   },
+   "volumeMounts": {},
+   "variables": {
+    "UMAMI_ADMIN_PASSWORD": {
+     "defaultValue": "${{secret(24, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+     "description": "Password for the admin user, generated at deploy time. Replaces the default admin/umami on first boot; change it in Umami afterwards (Settings -> Profile).",
+     "isOptional": false
+    },
+    "DATABASE_URL": {
+     "defaultValue": "postgresql://${{Postgres.POSTGRES_USER}}:${{Postgres.POSTGRES_PASSWORD}}@${{Postgres.RAILWAY_PRIVATE_DOMAIN}}:5432/${{Postgres.POSTGRES_DB}}",
+     "description": "Postgres connection (private network)",
+     "isOptional": false
+    },
+    "APP_SECRET": {
+     "defaultValue": "${{secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+     "description": "Signs login tokens and share links. Changing it signs everyone out.",
+     "isOptional": false
+    },
+    "TWO_FACTOR_ENCRYPTION_KEY": {
+     "defaultValue": "${{secret(64, \"0123456789abcdef\")}}",
+     "description": "Encrypts two-factor secrets (64 hex characters). Keep it, or users with 2FA can't sign in.",
+     "isOptional": false
+    },
+    "HOSTNAME": {
+     "defaultValue": "::",
+     "description": "Listen on IPv4 and IPv6 - leave as is.",
+     "isOptional": false
+    },
+    "PORT": {
+     "defaultValue": "3000",
+     "description": "HTTP port Umami listens on - leave as is.",
+     "isOptional": false
+    }
+   }
+  },
+  "bea60316-3b01-4f55-a68d-3e49eb01b55f": {
+   "icon": "https://devicons.railway.app/i/postgresql.svg",
+   "name": "Postgres",
+   "build": {},
+   "deploy": {
+    "startCommand": null,
+    "healthcheckPath": null,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+   },
+   "source": {
+    "image": "postgres:17.11-alpine"
+   },
+   "networking": {
+    "serviceDomains": {}
+   },
+   "volumeMounts": {
+    "78e9b836-b94f-48e1-b0ee-a7e4168f7af8": {
+     "mountPath": "/var/lib/postgresql/data"
+    }
+   },
+   "variables": {
+    "POSTGRES_DB": {
+     "defaultValue": "umami",
+     "description": "Database name",
+     "isOptional": false
+    },
+    "POSTGRES_USER": {
+     "defaultValue": "umami",
+     "description": "Database user",
+     "isOptional": false
+    },
+    "POSTGRES_PASSWORD": {
+     "defaultValue": "${{secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+     "description": "Auto-generated database password",
+     "isOptional": false
+    },
+    "PGDATA": {
+     "defaultValue": "/var/lib/postgresql/data/pgdata",
+     "description": "Data subdirectory - keeps Postgres happy on Railway volumes",
+     "isOptional": false
+    },
+    "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+     "defaultValue": "60",
+     "description": "Time for Postgres to shut down cleanly on redeploy",
+     "isOptional": false
+    }
+   }
+  }
+ }
+}

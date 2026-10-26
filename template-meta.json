@@ -1,0 +1,8 @@
+{
+  "name": "Umami | Privacy-Friendly Web Analytics with Postgres",
+  "short_name": "Umami Web Analytics",
+  "description": "Cookie-free Google Analytics alternative, admin password set on boot",
+  "category": "Analytics",
+  "image": "https://raw.githubusercontent.com/two-workspaces/umami/main/icon.svg",
+  "card_desc": "Umami: simple, cookie-free website analytics you own. Runs Umami 3.4.1 on its own Postgres, with the default admin password replaced on first boot."
+}
