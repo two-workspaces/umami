@@ -52,7 +52,7 @@ The stack is two services: Umami and Postgres.
 
 **Back up.** Everything is in Postgres. Use Railway's volume backups or `pg_dump`.
 
-**Resources.** A fresh deploy uses about 150 MB of RAM for Umami and about 50 MB for Postgres. Postgres grows with traffic: each page view is a row.
+**Resources.** A fresh deploy uses about 290 MB of RAM for Umami and about 55 MB for Postgres, so it fits the Free plan. Postgres grows with traffic: each page view is a row.
 
 ## Why Deploy Umami on Railway?
 
