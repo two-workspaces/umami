@@ -2,7 +2,7 @@
  "buckets": {},
  "services": {
   "b9c9555e-6aa5-4edd-9320-a5d5c8ab1803": {
-   "icon": "https://raw.githubusercontent.com/two-workspaces/umami/main/icon.svg",
+   "icon": "https://raw.githubusercontent.com/umami-software/umami/559e3c607c23d2c72d9bd4f6481bda428255323c/src/assets/logo-white.svg",
    "name": "Umami",
    "build": {
     "dockerfilePath": "Dockerfile"
