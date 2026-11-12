@@ -2,13 +2,13 @@
 
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/umami-web-analytics?referralCode=sLjDXb&utm_medium=integration&utm_source=button&utm_campaign=umami-web-analytics)
 
-[Umami](https://umami.is/) is a simple, privacy-friendly alternative to Google Analytics. It counts page views, visitors, referrers, countries, devices and custom events without cookies and without collecting personal data, so you don't need a consent banner for it. This template runs Umami 3.4.1 from the official image on its own Postgres 17. The default `admin`/`umami` password is replaced on first boot, so a fresh deploy is never left open with a well-known login.
+[Umami](https://umami.is/) is a simple, privacy-friendly alternative to Google Analytics. It counts page views, visitors, referrers, countries, devices and custom events without cookies and without collecting personal data, so you don't need a consent banner for it. This template runs Umami 3.5.0 from the official image on its own Postgres 17. The default `admin`/`umami` password is replaced on first boot, so a fresh deploy is never left open with a well-known login.
 
 ## About Hosting Umami
 
 The stack is two services: Umami and Postgres.
 
-- **Upstream's image, pinned.** Umami runs the official `ghcr.io/umami-software/umami` image at a fixed release (3.4.1), not `latest`. A thin wrapper ([source](https://github.com/two-workspaces/umami)) adds one small script and changes nothing else. Upgrading means bumping the tag.
+- **Upstream's image, pinned.** Umami runs the official `ghcr.io/umami-software/umami` image at a fixed release (3.5.0), not `latest`. A thin wrapper ([source](https://github.com/two-workspaces/umami)) adds one small script and changes nothing else. Upgrading means bumping the tag.
 - **No default password.** Every new Umami database starts with the user `admin` and the password `umami`. Here a small script waits for Umami to start and changes that password to the generated `UMAMI_ADMIN_PASSWORD`. On later boots it does nothing.
 - **Postgres 17 on a volume.** Websites, events, sessions and users live in Postgres. Umami waits for Postgres to accept connections before it starts and runs its migrations on every start.
 - **Small.** Umami is one Node.js process with no queue or cache to run alongside it. Both services fit in Railway's smaller plans.
